@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">WhatsApp Othman</string>
+    <string name="title_activity_main">WhatsApp Othman</string>
+    <string name="package_name">com.othman.whatsappothman</string>
+    <string name="custom_url_scheme">com.othman.whatsappothman</string>
+</resources>
