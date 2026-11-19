@@ -222,10 +222,8 @@ form.addEventListener("submit", async event => {
     return;
   }
 
-  const name = document.getElementById("regName").value.trim();
   const country = document.getElementById("regCountry").value;
   let phone = document.getElementById("regPhone").value.trim();
-  const username = document.getElementById("regUsername").value.trim().toLowerCase();
   const language = document.getElementById("regLanguage").value;
   const terms = document.getElementById("regTerms").checked;
 
@@ -235,13 +233,8 @@ form.addEventListener("submit", async event => {
   }
   const fullPhone = country + phone;
 
-  if (!name || !terms || !/^\+[1-9]\d{7,14}$/.test(fullPhone)) {
-    message("تأكد من الاسم ورقم الهاتف والموافقة على الشروط.");
-    return;
-  }
-
-  if (!/^[a-z0-9_.-]{3,25}$/.test(username)) {
-    message("اسم المستخدم خاصو يكون بين 3 و25 حرف، وبلا فراغات.");
+  if (!terms || !/^\+[1-9]\d{7,14}$/.test(fullPhone)) {
+    message("تأكد من رقم الهاتف والموافقة على الشروط.");
     return;
   }
 
@@ -304,25 +297,16 @@ form.addEventListener("submit", async event => {
           }
 
           await runTransaction(db, async transaction => {
-            const usernameRef = doc(db, "usernames", username);
-            const usernameSnap = await transaction.get(usernameRef);
-
-            if (usernameSnap.exists()) {
-              throw new Error("USERNAME_EXISTS");
-            }
-
-            transaction.set(usernameRef, { uid });
-
             transaction.set(doc(db, "users", uid), {
-              name,
-              username,
               phone: fullPhone,
-              language
+              language,
+              name: "",
+              username: ""
             });
 
             transaction.set(doc(db, "publicProfiles", uid), {
-              name,
-              username,
+              name: "",
+              username: "",
               language
             });
           });

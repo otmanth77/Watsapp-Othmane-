@@ -487,10 +487,6 @@ nav button:hover {
   </div>
 
   <form class="reg-form" id="registrationForm">
-    <label class="reg-label" for="regName">الاسم الكامل</label>
-    <input class="reg-input" id="regName" required maxlength="60"
-      placeholder="دخل الاسم الكامل">
-
     <label class="reg-label" for="regPhone">رقم الهاتف</label>
     <div class="phone-row">
       <select class="reg-input" id="regCountry">
@@ -504,17 +500,6 @@ nav button:hover {
       <input class="reg-input" id="regPhone" type="tel"
         required maxlength="18" placeholder="رقم الهاتف">
     </div>
-
-    <label class="reg-label" for="regUsername">اسم المستخدم</label>
-    <input class="reg-input" id="regUsername" required
-      maxlength="25" placeholder="مثال: othman">
-
-    <label class="reg-label">الصورة الشخصية</label>
-    <label class="photo-label" for="regPhoto">اختار صورة من الهاتف</label>
-    <input id="regPhoto" type="file" accept="image/*"
-      style="display:none">
-    <img id="regPreview" alt=""
-      style="display:none;width:75px;height:75px;object-fit:cover;border-radius:50%;margin:12px auto">
 
     <label class="reg-label" for="regLanguage">اللغة</label>
     <select class="reg-input" id="regLanguage">
@@ -546,37 +531,19 @@ nav button:hover {
   const form = document.getElementById('registrationForm');
   const terms = document.getElementById('regTerms');
   const submit = document.getElementById('regSubmit');
-  const photo = document.getElementById('regPhoto');
-  const preview = document.getElementById('regPreview');
 
 
   function checkForm(){
     submit.disabled = !(
       terms.checked &&
-      document.getElementById('regName').value.trim() &&
-      document.getElementById('regPhone').value.trim() &&
-      document.getElementById('regUsername').value.trim()
+      document.getElementById('regPhone').value.trim()
     );
   }
 
   form.addEventListener('input', checkForm);
   terms.addEventListener('change', checkForm);
 
-  photo.addEventListener('change', function(){
-    const file = this.files && this.files[0];
-    if(!file) return;
-    if(file.size > 2 * 1024 * 1024){
-      alert('الصورة خاصها تكون أقل من 2MB');
-      this.value = '';
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function(){
-      preview.src = reader.result;
-      preview.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  });
+
 
 })();
 </script>
