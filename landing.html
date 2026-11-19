@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>WhatsApp Othman | الموقع الرسمي</title>
+<meta name="description" content="اكتشف WhatsApp Othman، تعرف على المميزات والتصميم وتجربة التطبيق.">
+<meta name="keywords" content="WhatsApp Othman, واتساب عتمان">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#050706;color:#fff;font-family:Arial,Tahoma,sans-serif}
+:root{--green:#00f5a0;--muted:#a9b8af}
+a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:10;background:#050706ed;border-bottom:1px solid #17452f;padding:16px 6%;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px)}
+.logo{font-size:20px;font-weight:900;color:var(--green)}
+nav a{font-size:13px;margin:0 8px;color:#ddd}
+.hero{min-height:600px;padding:75px 7%;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px;background:radial-gradient(ellipse at 75% 40%,#07552e66,transparent 65%)}
+.tag{display:inline-block;border:1px solid #00f5a077;border-radius:30px;padding:10px 17px;color:var(--green);font-size:13px}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.35;margin:22px 0}
+h1 span,.green{color:var(--green)}
+.hero p{color:var(--muted);line-height:2;font-size:16px}
+.buttons{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
+.btn{padding:16px 24px;border-radius:13px;font-weight:bold;display:inline-block}
+.mainbtn{background:linear-gradient(120deg,#00ffa2,#00b879);color:#002114;box-shadow:0 0 28px #00f5a044}
+.altbtn{border:1px solid #315b43}
+.art{height:390px;display:grid;place-items:center;position:relative}
+.ring{width:300px;height:300px;border:1px solid #00f5a077;border-radius:50%;position:absolute;box-shadow:0 0 65px #00f5a022}
+.ring:before{content:"";position:absolute;inset:25px;border:1px dashed #00f5a088;border-radius:50%}
+.art img{width:175px;height:235px;object-fit:cover;border-radius:22px;border:1px solid var(--green);box-shadow:0 0 35px #00f5a044}
+.orb{position:absolute;background:#10231a;border:1px solid #00f5a077;border-radius:15px;padding:14px;font-size:25px}
+.o1{top:35px;right:10px}.o2{bottom:35px;left:10px}
+section{padding:75px 7%}
+.head{text-align:center;max-width:750px;margin:0 auto 38px}
+.head h2{font-size:34px}
+.head p{color:var(--muted);line-height:2}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{background:linear-gradient(145deg,#101b15,#080c09);border:1px solid #1b4931;border-radius:19px;padding:25px;transition:.3s}
+.feature:hover{transform:translateY(-7px);border-color:var(--green);box-shadow:0 10px 35px #00f5a018}
+.feature .ico{font-size:32px;margin-bottom:15px}
+.feature h3{color:var(--green);margin:8px 0}
+.feature p{color:var(--muted);line-height:1.9;font-size:14px}
+.preview{background:radial-gradient(ellipse,#073c24,transparent 70%);text-align:center}
+.phone{width:260px;max-width:90%;margin:35px auto 0;background:#101713;border:5px solid #3b5145;border-radius:35px;padding:12px;box-shadow:0 0 45px #00f5a033}
+.screen{min-height:390px;background:#07110b;border-radius:23px;padding:17px;text-align:right}
+.screenhead{color:var(--green);font-weight:bold;border-bottom:1px solid #23422f;padding-bottom:15px}
+.chatline{display:flex;align-items:center;gap:10px;padding:13px 5px;border-bottom:1px solid #18251d}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00f5a0,#07552e);display:grid;place-items:center;color:#001}
+.chatline small{display:block;color:#91a398;margin-top:5px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.aboutbox{border:1px solid #1b4931;border-radius:20px;padding:28px;background:#0b120e}
+.aboutbox p{color:var(--muted);line-height:2}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{border:1px solid #1b4931;border-radius:18px;padding:23px;background:#0b120e}
+.number{font-size:30px;color:var(--green);font-weight:900}
+.download{background:linear-gradient(135deg,#06170e,#0c2417);border:1px solid #17613a;border-radius:25px;text-align:center;padding:50px 20px}
+.download h2{font-size:34px}
+.download p{color:var(--muted);line-height:2}
+.downloadbtn{display:inline-block;margin-top:20px;padding:19px 35px;border-radius:15px;background:var(--green);color:#001b10;font-weight:900;font-size:18px;box-shadow:0 0 30px #00f5a044}
+.arrow{font-size:35px;color:var(--green);animation:down 1s infinite alternate}
+@keyframes down{to{transform:translateY(12px)}}
+.faq{max-width:800px;margin:auto}
+details{background:#0b120e;border:1px solid #1b4931;border-radius:13px;padding:18px;margin:12px 0}
+summary{cursor:pointer;color:var(--green);font-weight:bold}
+details p{color:var(--muted);line-height:1.9}
+footer{text-align:center;padding:35px 15px;border-top:1px solid #17452f;color:#91a398;line-height:2}
+@media(max-width:750px){
+nav{padding:14px 4%}nav a{font-size:11px;margin:0 4px}
+.hero{grid-template-columns:1fr;text-align:center;padding:55px 6%}
+.buttons{justify-content:center}.art{height:320px}
+.features,.steps{grid-template-columns:1fr}
+.about{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">WHATSAPP OTHMAN</div>
+<div>
+<a href="#features">المميزات</a>
+<a href="#preview">المعاينة</a>
+<a href="#download">التحميل</a>
+</div>
+</nav>
+
+<header class="hero">
+<div>
+<span class="tag">✦ عالم التواصل بطريقة مختلفة</span>
+<h1>مرحبا بك في<br><span>WhatsApp Othman</span></h1>
+<p>اكتشف تجربة تواصل بتصميم عصري، ألوان مميزة، وواجهة تجمع بين البساطة والأناقة. مرحبا بك في عالم واتساب عتمان.</p>
+<div class="buttons">
+<a class="btn mainbtn" href="#download">اكتشف التحميل ↓</a>
+<a class="btn altbtn" href="#features">اكتشف المميزات</a>
+</div>
+</div>
+<div class="art">
+<div class="ring"></div>
+<img src="hacker.jpg" alt="صورة فنية للتطبيق">
+<div class="orb o1">✦</div>
+<div class="orb o2">◉</div>
+</div>
+</header>
+
+<section id="features">
+<div class="head">
+<span class="tag">مميزات التطبيق</span>
+<h2>كل ما تحتاجه في <span class="green">مكان واحد</span></h2>
+<p>واجهة مصممة لتمنحك تجربة استعمال مريحة ومنظمة، مع مجموعة من الأدوات داخل التطبيق.</p>
+</div>
+<div class="features">
+<div class="feature"><div class="ico">💬</div><h3>المحادثات</h3><p>واجهة للمحادثات بتصميم واضح وسهل الاستعمال.</p></div>
+<div class="feature"><div class="ico">🎨</div><h3>ألوان مميزة</h3><p>تصميم داكن ولمسات خضراء تمنح التطبيق طابعا خاصا.</p></div>
+<div class="feature"><div class="ico">😀</div><h3>الإيموجيات</h3><p>استعمال الرموز التعبيرية للتعبير عن الرسائل.</p></div>
+<div class="feature"><div class="ico">📎</div><h3>الوسائط</h3><p>واجهة لاختيار الملفات والوسائط من الهاتف.</p></div>
+<div class="feature"><div class="ico">🎙️</div><h3>التسجيل الصوتي</h3><p>أداة مخصصة للتسجيل الصوتي داخل واجهة المحادثة.</p></div>
+<div class="feature"><div class="ico">⭐</div><h3>الرسائل المميزة</h3><p>إمكانية تمييز الرسائل المهمة والرجوع إليها.</p></div>
+</div>
+</section>
+
+<section class="preview" id="preview">
+<div class="head">
+<span class="tag">نظرة على التصميم</span>
+<h2>تصميم أنيق في <span class="green">كل تفصيلة</span></h2>
+<p>هذه معاينة توضيحية لشكل واجهة المحادثات.</p>
+</div>
+<div class="phone">
+<div class="screen">
+<div class="screenhead">WhatsApp Othman</div>
+<div class="chatline"><div class="avatar">م</div><div>محادثة جديدة<small>مرحبا بك في التطبيق</small></div></div>
+<div class="chatline"><div class="avatar">ع</div><div>الأصدقاء<small>مساحة للتواصل</small></div></div>
+<div class="chatline"><div class="avatar">✦</div><div>الرسائل المميزة<small>رسائلك المهمة</small></div></div>
+<div style="text-align:center;color:#00f5a0;margin-top:35px">✦ تجربة WhatsApp Othman ✦</div>
+</div>
+</div>
+</section>
+<section class="about">
+<div>
+<span class="tag">قصتنا</span>
+<h2>مشروع <span class="green">WhatsApp Othman</span></h2>
+<p style="color:#a9b8af;line-height:2">مشروع بواجهة خاصة وهوية بصرية مميزة، الهدف منه تقديم تجربة تواصل بتصميم عصري يجمع بين الأناقة وسهولة الاستخدام.</p>
+</div>
+<div class="aboutbox">
+<h3 class="green">رؤيتنا ✦</h3>
+<p>نهتم بالتفاصيل الصغيرة، من الألوان إلى طريقة عرض المحادثات، حتى تكون تجربة الاستعمال واضحة ومريحة.</p>
+<p>هذا المشروع في مرحلة التطوير، ونعمل على تحسينه وإضافة المزيد من المميزات.</p>
+</div>
+</section>
+
+<section>
+<div class="head">
+<span class="tag">كيف تبدأ؟</span>
+<h2>ثلاث خطوات <span class="green">بسيطة</span></h2>
+</div>
+<div class="steps">
+<div class="step"><div class="number">01</div><h3>اكتشف الموقع</h3><p style="color:#a9b8af;line-height:1.8">تعرّف على واجهة التطبيق ومميزاته من هذه الصفحة.</p></div>
+<div class="step"><div class="number">02</div><h3>تعرّف على التطبيق</h3><p style="color:#a9b8af;line-height:1.8">شاهد المعاينة واكتشف الأدوات المتوفرة.</p></div>
+<div class="step"><div class="number">03</div><h3>تابع الإصدارات</h3><p style="color:#a9b8af;line-height:1.8">تابع الموقع لمعرفة موعد توفر النسخة القابلة للتثبيت.</p></div>
+</div>
+</section>
+
+<section id="download">
+<div class="download">
+<span class="tag">التحميل الرسمي</span>
+<h2>هل أنت مستعد؟</h2>
+<p>نسخة APK القابلة للتثبيت لم يتم تجهيزها بعد.<br>زر التحميل سيصبح متاحاً عند إصدار النسخة الرسمية.</p>
+<div class="arrow">↓</div>
+<a class="downloadbtn" href="index.html">فتح التطبيق حالياً ↗</a>
+<p style="font-size:12px">هذا الزر يفتح نسخة الويب الحالية، وليس ملف APK.</p>
+</div>
+</section>
+
+<section>
+<div class="head">
+<span class="tag">أسئلة شائعة</span>
+<h2>هل عندك <span class="green">سؤال؟</span></h2>
+</div>
+<div class="faq">
+<details><summary>ما هو WhatsApp Othman؟</summary><p>مشروع تطبيق بواجهة خاصة وتصميم مميز، وماشي تطبيق واتساب الرسمي.</p></details>
+<details><summary>واش نقدر نحمل التطبيق؟</summary><p>حالياً يمكن فتح نسخة الويب، أما ملف APK فمازال ما تجهزش.</p></details>
+<details><summary>واش المشروع مازال كيتطور؟</summary><p>نعم، المشروع قابل للتطوير والتحسين وإضافة مميزات جديدة.</p></details>
+<details><summary>كيفاش ندخل للتطبيق؟</summary><p>اضغط على زر فتح التطبيق حالياً للانتقال إلى صفحة التطبيق.</p></details>
+</div>
+</section>
+
+<footer>
+<div class="logo">WHATSAPP OTHMAN ✦</div>
+<p>مشروع مستقل بتصميم وهوية خاصة.</p>
+<p>© 2026 WhatsApp Othman — جميع الحقوق محفوظة</p>
+</footer>
+</body>
+</html>
