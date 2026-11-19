@@ -38,6 +38,12 @@ jobs:
           cp firebase-auth.js www/
           cp manifest.json sw.js logo.png hacker.jpg icon-192.png icon-512.png www/
 
+      - name: Generate app icons
+        run: |
+          mkdir -p assets
+          cp logo.png assets/icon.png
+          npx capacitor-assets generate --android
+
       - name: Sync Android
         run: npx cap sync android
 

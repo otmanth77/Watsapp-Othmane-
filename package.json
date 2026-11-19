@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
     "@firebase/rules-unit-testing": "^6.0.0",
     "firebase": "^13.4.0"
   },
