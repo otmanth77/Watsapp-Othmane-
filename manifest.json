@@ -1,7 +1,7 @@
 {
   "name": "واتساب عتمان",
   "short_name": "واتساب عتمان",
-  "start_url": "./index.html",
+  "start_url": "./app.html",
   "display": "standalone",
   "background_color": "#101820",
   "theme_color": "#075e54",

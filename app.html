@@ -549,9 +549,6 @@ nav button:hover {
   const photo = document.getElementById('regPhoto');
   const preview = document.getElementById('regPreview');
 
-  if(localStorage.getItem('othman_registered') === 'true'){
-    screen.style.display = 'none';
-  }
 
   function checkForm(){
     submit.disabled = !(
@@ -581,26 +578,6 @@ nav button:hover {
     reader.readAsDataURL(file);
   });
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(submit.disabled) return;
-
-    const profile = {
-      name: document.getElementById('regName').value.trim(),
-      phone: document.getElementById('regCountry').value +
-        document.getElementById('regPhone').value.trim(),
-      username: document.getElementById('regUsername').value.trim(),
-      language: document.getElementById('regLanguage').value
-    };
-
-    try {
-      localStorage.setItem('othman_profile', JSON.stringify(profile));
-      localStorage.setItem('othman_registered', 'true');
-      screen.style.display = 'none';
-    } catch(err) {
-      alert('ما قدرناش نحفظو المعلومات. حاول بصورة أصغر.');
-    }
-  });
 })();
 </script>
 
@@ -628,6 +605,11 @@ nav button:hover {
 </div>
 <div id="searchBox" style="display:none;padding:10px;background:#075e54">
   <input id="searchInput" oninput="searchChats()" placeholder="قلب على محادثة..." style="width:100%;padding:12px;border:0;border-radius:10px;font-size:16px">
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <input id="userSearchInput" placeholder="قلب على مستخدم بـ @username" style="flex:1;min-width:0;padding:12px;border:0;border-radius:10px;font-size:15px">
+    <button type="button" onclick="searchRegisteredUser()" style="padding:10px 14px;border:0;border-radius:10px;background:#25d366;color:#063b2b;font-weight:bold">بحث</button>
+  </div>
+  <div id="userSearchResult" style="color:white;padding:10px 2px;font-size:14px"></div>
 </div>
 <nav>
 <button>المحادثات</button>
@@ -1096,5 +1078,7 @@ picker.addEventListener('emoji-click', (event) => {
   input.setSelectionRange(pos, pos);
 });
 </script>
-\n</body>
+
+<script type="module" src="./firebase-auth.js"></script>
+</body>
 </html>
