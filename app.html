@@ -918,53 +918,22 @@ async function toggleAudioRecording(){
   }
 }
 
-function sendMessage(){
+async function sendMessage(){
   const text = input.value.trim();
   if(!text) return;
 
-  const msg = document.createElement('div');
-  msg.classList.add('message-arrival');
-  msg.style.cssText = 'padding:8px;margin:6px;background:#075e54;border-radius:8px';
+  if(!window.sendChatMessage){
+    alert("خدمة الرسائل غير جاهزة.");
+    return;
+  }
 
-  const shine = document.createElement('div');
-  shine.className = 'message-shine';
-  msg.appendChild(shine);
-
-  const content = document.createElement('span');
-  content.textContent = text;
-  msg.appendChild(content);
-
-  const ticks = document.createElement('span');
-  ticks.style.cssText = 'color:#53bdeb;font-size:12px';
-  ticks.textContent = ' ✓✓';
-  msg.appendChild(ticks);
-
-  const star = document.createElement('button');
-  star.textContent = '☆';
-  star.style.cssText = 'background:none;border:0;color:#ffd54f;font-size:20px';
-  star.onclick = function(){
-    let saved = JSON.parse(localStorage.getItem('starredMessages') || '[]');
-    const id = Date.now().toString() + Math.random().toString(16).slice(2);
-    saved.push({id:id,text:text});
-    localStorage.setItem('starredMessages', JSON.stringify(saved));
-    star.textContent = '★';
-    star.disabled = true;
-  };
-  msg.appendChild(star);
-
-  const divider = document.createElement('div');
-  divider.className = 'message-divider';
-
-  const time = document.createElement('span');
-  time.textContent = new Date().toLocaleTimeString('ar-MA', {
-    hour:'2-digit', minute:'2-digit'
-  });
-
-  divider.appendChild(time);
-  messages.appendChild(divider);
-  messages.appendChild(msg);
-  input.value = '';
-  messages.scrollTop = messages.scrollHeight;
+  try {
+    await window.sendChatMessage(text);
+    input.value = "";
+  } catch(error) {
+    console.error(error);
+    alert(error.message || "تعذر إرسال الرسالة. حاول مرة أخرى.");
+  }
 }
 
 input.addEventListener('keydown', function(e){

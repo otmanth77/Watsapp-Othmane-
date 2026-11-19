@@ -9,10 +9,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  doc,
-  runTransaction,
-  getDoc
+  getFirestore, doc, runTransaction, getDoc,
+  setDoc, collection, addDoc, query, orderBy,
+  onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -82,12 +81,101 @@ window.searchRegisteredUser = async function () {
     resultBox.appendChild(name);
     resultBox.appendChild(handle);
 
+    const openButton = document.createElement("button");
+    openButton.textContent = "فتح المحادثة";
+    openButton.style.cssText = "display:block;margin-top:12px;padding:12px;background:#25d366;color:#063b2b;border:0;border-radius:10px;font-weight:bold";
+    openButton.onclick = () => window.openPrivateChat(uid, profile.name || "مستخدم");
+    resultBox.appendChild(openButton);
+
   } catch (error) {
     console.error("User search error:", error);
     resultBox.textContent = "وقع مشكل فالبحث. حاول مرة أخرى.";
   }
 };
 
+
+
+let activeChatId = null;
+let unsubscribeChat = null;
+
+window.openPrivateChat = async function(uid, name) {
+  if (!auth.currentUser) {
+    alert("خاصك تسجل الدخول أولاً.");
+    return;
+  }
+
+  try {
+    const participants = [auth.currentUser.uid, uid].sort();
+    const chatId = participants.join("_");
+    const chatRef = doc(db, "chats", chatId);
+    const chatSnap = await getDoc(chatRef);
+
+    if (!chatSnap.exists()) {
+      await setDoc(chatRef, {
+        createdBy: auth.currentUser.uid,
+        participants
+      });
+    }
+
+    activeChatId = chatId;
+    window.activeChatId = chatId;
+
+    document.getElementById("conversation").style.display = "flex";
+    document.querySelector("#conversation header span").textContent = name;
+
+    if (unsubscribeChat) unsubscribeChat();
+
+    const messagesRef = collection(db, "chats", chatId, "messages");
+    const messagesQuery = query(messagesRef, orderBy("createdAt", "asc"));
+
+    unsubscribeChat = onSnapshot(messagesQuery, snapshot => {
+      const box = document.getElementById("messages");
+      box.innerHTML = "";
+
+      snapshot.forEach(item => {
+        const data = item.data();
+        const row = document.createElement("div");
+        row.style.cssText = "padding:10px;margin:7px;background:" +
+          (data.senderId === auth.currentUser.uid ? "#075e54" : "#263b43") +
+          ";border-radius:10px;max-width:85%;overflow-wrap:anywhere";
+
+        const content = document.createElement("div");
+        content.textContent = data.text;
+        row.appendChild(content);
+
+        const time = document.createElement("small");
+        time.style.cssText = "display:block;text-align:left;opacity:.7;margin-top:5px";
+        time.textContent = data.createdAt?.toDate
+          ? data.createdAt.toDate().toLocaleTimeString("ar-MA", {hour:"2-digit",minute:"2-digit"})
+          : "الآن";
+        row.appendChild(time);
+
+        box.appendChild(row);
+      });
+
+      box.scrollTop = box.scrollHeight;
+    }, error => {
+      console.error("Chat listener:", error);
+      alert("تعذر تحميل الرسائل. تحقق من اتصال الإنترنت والصلاحيات.");
+    });
+
+  } catch (error) {
+    console.error("Open chat:", error);
+    alert("ما قدرناش نفتحو المحادثة. حاول مرة أخرى.");
+  }
+};
+
+window.sendChatMessage = async function(text) {
+  if (!auth.currentUser || !activeChatId) {
+    throw new Error("خاصك تختار مستخدماً قبل إرسال الرسائل.");
+  }
+
+  await addDoc(collection(db, "chats", activeChatId, "messages"), {
+    senderId: auth.currentUser.uid,
+    text: text,
+    createdAt: serverTimestamp()
+  });
+};
 
 auth.languageCode = "ar";
 
