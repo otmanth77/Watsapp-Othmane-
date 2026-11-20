@@ -4,7 +4,7 @@ android {
     namespace = "com.othman.whatsappothman"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.othman.whatsappothman.v2"
+        applicationId "com.othman.whatsappothman.v21"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3
@@ -16,8 +16,24 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    def keystoreProperties = new Properties()
+    def keystorePropertiesFile = file("keystore.properties")
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties.getProperty("storeFile", "othman-v2-release.jks"))
+            storePassword keystoreProperties.getProperty("storePassword", "")
+            keyAlias keystoreProperties.getProperty("keyAlias", "othman-v2")
+            keyPassword keystoreProperties.getProperty("keyPassword", "")
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -46,9 +62,17 @@ apply from: 'capacitor.build.gradle'
 
 try {
     def servicesJSON = file('google-services.json')
-    if (servicesJSON.text) {
-        apply plugin: 'com.google.gms.google-services'
+    if (servicesJSON.exists()) {
+        def googleConfig = new groovy.json.JsonSlurper().parse(servicesJSON)
+        def matchingClient = googleConfig.client?.any {
+            it.client_info?.android_client_info?.package_name == "com.othman.whatsappothman.v21"
+        }
+        if (matchingClient) {
+            apply plugin: 'com.google.gms.google-services'
+        } else {
+            logger.lifecycle("No Google Services client for com.othman.whatsappothman.v21; plugin skipped.")
+        }
     }
 } catch(Exception e) {
-    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+    logger.lifecycle("Google Services configuration skipped: ${e.message}")
 }
