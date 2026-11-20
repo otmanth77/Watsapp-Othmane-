@@ -36,7 +36,7 @@ jobs:
           mkdir -p www
           cp app.html www/index.html
           cp firebase-auth.js www/
-          cp manifest.json sw.js logo.png hacker.jpg icon-192.png icon-512.png www/
+          cp manifest.json sw.js logo.png hacker.jpg registration-background.png icon-192.png icon-512.png www/
 
       - name: Generate app icons
         run: |
