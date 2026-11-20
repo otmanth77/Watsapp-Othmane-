@@ -369,7 +369,7 @@ verifyResendButton.addEventListener("click", async () => {
     verifyCaptchaContainer.innerHTML = "";
 
     verifier = new RecaptchaVerifier(auth, "verify-recaptcha-container", {
-      size: "normal"
+      size: "invisible"
     });
 
     await verifier.render();
@@ -445,7 +445,7 @@ form.addEventListener("submit", async event => {
 
     if (!verifier) {
       verifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-        size: "normal"
+        size: "invisible"
       });
       await verifier.render();
     }
@@ -464,6 +464,6 @@ form.addEventListener("submit", async event => {
     verifier = null;
     registrationInProgress = false;
     submit.disabled = false;
-    message("تعذر إرسال الرمز. تأكد من رقم الهاتف والتحقق من أنك لست برنامجاً آلياً.");
+    message("فشل إرسال SMS: " + (error.code || error.message || "خطأ غير معروف"));
   }
 }, true);
